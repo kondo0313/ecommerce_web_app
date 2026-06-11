@@ -1,0 +1,30 @@
+<html>
+<body>
+    <h1>ユーザー登録</h1>
+
+    <div style="width:300px; border:1px solid #ccc; padding:20px;">
+        <form method="post">
+            {% csrf_token %}
+
+            <p>会員ID</p>
+            {{ form.user_id }}
+
+            <p>パスワード</p>
+            {{ form.password }}
+
+            <p>パスワード（確認）</p>
+            {{ form.password_confirm }}
+
+            <p>お名前</p>
+            {{ form.name }}
+
+            <p>ご住所</p>
+            {{ form.address }}
+
+            <br>
+            <button type="submit">登録確認</button>
+        </form>
+    </div>
+
+</body>
+</html>
