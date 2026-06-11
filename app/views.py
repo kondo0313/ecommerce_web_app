@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect
 def index(request):
     return render(request, "app/test.html")
 
-def signup(request):
+def admin_signup(request):
     if request.method == "POST":
         form = UserCreationForm(request.POST)
         if form.is_valid():
@@ -13,4 +13,4 @@ def signup(request):
             return redirect("index")
     else:
         form = UserCreationForm()
-    return render(request, "app/signup.html", {"form": form})
+    return render(request, "app/admin_signup.html", {"form": form})
