@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from app.views import index, admin_register, user_register, user_register_commit, user_login, user_info, user_update, user_update_commit
+from app.views import index, admin_register, user_register, user_register_commit, user_login, user_info, user_update, user_update_commit, withdraw_confirm, withdraw_commit
 
 
 urlpatterns = [
@@ -28,5 +28,7 @@ urlpatterns = [
     path('accounts/UserLogin/', user_login, name='user_login'),
     path('accounts/UserInfo/', user_info, name='user_info'),
     path('accounts/UserUpdate/', user_update, name='user_update'),
-    path("accounts/UpdateUserCommit/", user_update_commit, name="user_update_commit")
+    path("accounts/UpdateUserCommit/", user_update_commit, name="user_update_commit"),
+    path("accounts/WithdrawConfirm/", withdraw_confirm, name="withdraw_confirm"),
+    path("accounts/WithdrawCommit/", withdraw_commit, name="withdraw_commit"),
 ]
