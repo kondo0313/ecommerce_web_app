@@ -1,0 +1,30 @@
+<html>
+<body>
+    <h1>会員情報</h1>
+
+    <table border="1" cellpadding="10" style="border-collapse: collapse;">
+
+        <tr>
+            <td style="background-color: #eee;">会員ID</td>
+            <td>{{ user.user_id }}</td>
+        </tr>
+
+        <tr>
+            <td style="background-color: #eee;">パスワード</td>
+            <td>表示なし</td>
+        </tr>
+
+        <tr>
+            <td style="background-color: #eee;">お名前</td>
+            <td>{{ user.name }}</td>
+        </tr>
+
+        <tr>
+            <td style="background-color: #eee;">ご住所</td>
+            <td>{{ user.address }}</td>
+        </tr>
+
+    </table>
+    <a href="/accounts/UserUpdate/">会員情報の変更</a>
+</body>
+</html>

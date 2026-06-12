@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect
 from .models import AccountUser
 from django.contrib.auth.hashers import check_password
 from .forms import UserLoginForm
-
+from .forms import UserSignupForm
 def index(request):
     return render(request, "app/test.html")
 
@@ -74,6 +74,65 @@ def user_login(request):
 
     return render(request, "app/accounts/user_login.html", {"form": form})
 
+def user_info(request):
+    user_id = request.session.get("user_id")
+
+    if not user_id:
+        return redirect("user_login")
+    
+    user = AccountUser.objects.filter(user_id=user_id).first()
+    #print(user)
+
+    return render(request, "app/accounts/user_info.html", {"user": user})
+
+def user_update(request):
+    user_id = request.session.get("user_id")
+
+    if not user_id:
+        return redirect("user_login")
+
+    user = AccountUser.objects.filter(user_id=user_id).first()
+
+    if request.method == "POST":
+        form = UserSignupForm(request.POST)
+        if form.is_valid():
+            return render(
+                request,
+                "app/accounts/user_update_confirm.html",
+                {"data": form.cleaned_data}
+            )
+    else:
+        form = UserSignupForm(initial={
+            "user_id": user.user_id,
+            "password": user.password,
+            "password": user.password,  # confirm用
+            "name": user.name,
+            "address": user.address,
+        })
+
+    return render(request, "app/accounts/user_update.html", {
+        "form": form
+    })
+
+def user_update_commit(request):
+    user_id = request.session.get("user_id")
+
+    if not user_id:
+        return redirect("user_login")
+
+    user = AccountUser.objects.filter(user_id=user_id).first()
+
+    if request.method == "POST" and user:
+        user.password = request.POST.get("password")
+        user.name = request.POST.get("name")
+        user.address = request.POST.get("address")
+        user.save()
+
+    return render(
+        request,
+        "app/accounts/user_update_commit.html",
+        {"data": user}
+    )
 
 
 

@@ -16,7 +16,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from app.views import index, admin_register, user_register, user_register_commit, user_login
+from app.views import index, admin_register, user_register, user_register_commit, user_login, user_info, user_update, user_update_commit
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,4 +26,7 @@ urlpatterns = [
     path('accounts/UserRegister/', user_register, name='user_register'),
     path('accounts/RegisterUserCommit/', user_register_commit, name='user_register_commit'),
     path('accounts/UserLogin/', user_login, name='user_login'),
+    path('accounts/UserInfo/', user_info, name='user_info'),
+    path('accounts/UserUpdate/', user_update, name='user_update'),
+    path("accounts/UpdateUserCommit/", user_update_commit, name="user_update_commit")
 ]
