@@ -1,6 +1,8 @@
+</html>
+
 <html>
 <body>
-    <h1>登録確認</h1>
+    <h1>以下の会員情報で更新しますか？</h1>
 
     <table border="1">
         <tr>
@@ -23,21 +25,22 @@
         </tr>
     </table>
 
-        <br>
-
-        <form method="post" action="{% url 'user_register_commit' %}">
-            {% csrf_token %}
-
-            <input type="hidden" name="user_id" value="{{ data.user_id }}">
-            <input type="hidden" name="password" value="{{ data.password }}">
-            <input type="hidden" name="name" value="{{ data.name }}">
-            <input type="hidden" name="address" value="{{ data.address }}">
-
-            <button type="submit">登録</button>
-        </form>
-
-    </div>
     <br>
+
+    <form method="post" action="{% url 'user_update_commit' %}">
+        {% csrf_token %}
+
+        <input type="hidden" name="user_id" value="{{ data.user_id }}">
+        <input type="hidden" name="password" value="{{ data.password }}">
+        <input type="hidden" name="name" value="{{ data.name }}">
+        <input type="hidden" name="address" value="{{ data.address }}">
+
+        <button type="submit">変更</button>
+    </form>
+
+    <br>
+
     <a href="/accounts/UserUpdate/">商品検索へ（リンクがまだですぜ）</a>
+
 </body>
 </html>
