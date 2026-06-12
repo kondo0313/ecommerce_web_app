@@ -1,0 +1,14 @@
+<html>
+<body>
+    <h1>{{ name }}さんは本当に退会しますか？</h1>
+
+    <form method="post" action="{% url 'withdraw_commit' %}">
+        {% csrf_token %}
+
+        <button type="submit">退会</button>
+    </form>
+
+    <br>
+    <a href="">商品検索へ</a>
+</body>
+</html>

@@ -134,5 +134,28 @@ def user_update_commit(request):
         {"data": user}
     )
 
+def withdraw_confirm(request):
+    user_id = request.session.get("user_id")
+
+    user = AccountUser.objects.filter(user_id=user_id).first()
+
+    return render(
+        request,
+        "app/accounts/withdraw_confirm.html",
+        {"name": user.name}
+    )
+
+def withdraw_commit(request):
+    user_id = request.session.get("user_id")
+
+    if not user_id:
+        return redirect("user_login")
+
+    user = AccountUser.objects.filter(user_id=user_id).first()
+
+    if request.method == "POST" and user:
+        user.delete()                  # ← 退会（削除）
+
+    return render(request, "app/accounts/withdraw_commit.html", {"name": user.name})
 
 
