@@ -1,0 +1,20 @@
+<html>
+<body>
+    <h1>ログインしてください。</h1>
+
+    <div style="width:300px; border:1px solid #ccc; padding:20px;">
+        <form method="post">
+            {% csrf_token %}
+
+            <p>会員ID:</p>
+            {{ form.user_id }}
+
+            <p>パスワード:</p>
+            {{ form.password }}
+            <br>
+            <button type="submit">ログイン</button>
+        </form>
+    </div>
+
+</body>
+</html>

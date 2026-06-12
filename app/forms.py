@@ -8,3 +8,8 @@ class UserSignupForm(forms.ModelForm):
     class Meta:
         model = AccountUser
         fields = ["user_id", "password", "name", "address"]
+
+
+class UserLoginForm(forms.Form):
+    user_id = forms.CharField()
+    password = forms.CharField(widget=forms.PasswordInput)

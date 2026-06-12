@@ -1,0 +1,38 @@
+<html>
+<body>
+    <h1>登録確認</h1>
+
+    <div style="width:300px; border:1px solid #ccc; padding:20px;">
+
+        <p>会員ID</p>
+        {{ data.user_id }}
+
+        <p>パスワード</p>
+        {% for i in data.password %}*{% endfor %}
+
+        <p>お名前</p>
+        {{ data.name }}
+
+        <p>ご住所</p>
+        {{ data.address }}
+
+        <br>
+
+        <!-- ★ ここが一番重要 ★ -->
+        <form method="post" action="{% url 'user_register_commit' %}">
+            {% csrf_token %}
+
+            <!-- hiddenで値を保持 -->
+            <input type="hidden" name="user_id" value="{{ data.user_id }}">
+            <input type="hidden" name="password" value="{{ data.password }}">
+            <input type="hidden" name="name" value="{{ data.name }}">
+            <input type="hidden" name="address" value="{{ data.address }}">
+
+            <!-- ★ これがボタン ★ -->
+            <button type="submit">登録</button>
+        </form>
+
+    </div>
+
+</body>
+</html>

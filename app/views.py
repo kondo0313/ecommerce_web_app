@@ -2,6 +2,9 @@ from django.shortcuts import render
 from django.contrib.auth.forms import UserCreationForm
 from .forms import UserSignupForm
 from django.shortcuts import render, redirect
+from .models import AccountUser
+from django.contrib.auth.hashers import check_password
+from .forms import UserLoginForm
 
 def index(request):
     return render(request, "app/test.html")
@@ -20,8 +23,57 @@ def user_register(request):
     if request.method == "POST":
         form = UserSignupForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect("index")
+            return render(
+                request,
+                "app/accounts/user_confirm.html",
+                {"data": form.cleaned_data}
+            )
     else:
         form = UserSignupForm()
+
     return render(request, "app/accounts/user_register.html", {"form": form})
+
+def user_register_commit(request):
+    if request.method == "POST":
+        AccountUser.objects.create(
+            user_id=request.POST.get("user_id"),
+            password=request.POST.get("password"),
+            name=request.POST.get("name"),
+            address=request.POST.get("address"),
+        )
+
+        #print("いま入ってるデータベースだよん", AccountUser.objects.all())
+
+        return render(
+            request,
+            "app/accounts/user_register_commit.html",
+            {"name": request.POST.get("name")}
+        )
+
+def user_login(request):
+    form = UserLoginForm(request.POST)
+    if request.method == "POST":
+        user_id = request.POST.get("user_id")
+        password = request.POST.get("password")
+
+        user = AccountUser.objects.filter(user_id=user_id).first()
+
+        #print("全部だよん", AccountUser.objects.all())
+
+        if user:
+            if user_id == user.user_id and password == user.password:
+                request.session["user_id"] = user.user_id
+                #print(":D")
+                return redirect("index")
+
+        return render(
+            request,
+            "app/accounts/user_login.html",
+            {"form": form}
+        )
+
+    return render(request, "app/accounts/user_login.html", {"form": form})
+
+
+
+
