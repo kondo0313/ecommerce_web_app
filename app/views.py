@@ -6,8 +6,16 @@ from .models import AccountUser
 from django.contrib.auth.hashers import check_password
 from .forms import UserLoginForm
 from .forms import UserSignupForm
+
+
 def index(request):
-    return render(request, "app/test.html")
+    user_id = request.session.get("user_id")
+
+    user = None
+    if user_id:
+        user = AccountUser.objects.filter(user_id=user_id).first()
+
+    return render(request, "app/main.html", {"user": user})
 
 def admin_register(request):
     if request.method == "POST":
@@ -157,5 +165,8 @@ def withdraw_commit(request):
         user.delete()                  # ← 退会（削除）
 
     return render(request, "app/accounts/withdraw_commit.html", {"name": user.name})
+
+def serch_result(request):
+    return render(request, "shop/serch_result.html")
 
 
