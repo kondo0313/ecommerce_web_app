@@ -1,0 +1,40 @@
+</html>
+
+
+<h1>商品の検索を行います。</h1>
+
+<form method="GET" action="">
+    カテゴリ：
+    <select name="category">
+        <option value="">すべて</option>
+        <option value="food">食品</option>
+        <option value="book">本</option>
+        <option value="other">その他</option>
+    </select>
+
+    キーワード：
+    <input type="text" name="keyword">
+
+    <input type="submit" value="検索">
+</form>
+
+<br>
+
+{% if request.session.user_id %}
+    ようこそ、{{user.name}}さん
+    <br>
+    <a href="/accounts/UserInfo">ユーザー情報</a>
+    <br>
+    <a href="/accounts/UserLogin">ログアウト(未実装)</a>
+{% else %}
+    <a href="/accounts/UserLogin">ログイン</a>
+{% endif %}
+
+<br>
+<a href="">ショッピングカートを見る</a>
+<br>
+<a href="">購入履歴（任意機能：まだ未実装）</a>
+<br>
+<a href="">管理者ページ（任意機能：まだ未実装）</a>
+
+</html>
