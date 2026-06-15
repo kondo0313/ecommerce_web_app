@@ -16,12 +16,25 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from app.views import index, admin_register, user_register, user_register_commit, user_login, user_info, user_update, user_update_commit, withdraw_confirm, withdraw_commit
+from app.views import (
+    index,
+    admin_register,
+    user_register,
+    user_register_commit,
+    user_login,
+    user_info,
+    user_update,
+    user_update_commit,
+    withdraw_confirm,
+    withdraw_commit,
+    serch_result,
+)
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index, name='index'),
+    path('SerchResult/', serch_result, name='serch_result'),
     path('accounts/AdminRegister/', admin_register, name='admin_register'),
     path('accounts/UserRegister/', user_register, name='user_register'),
     path('accounts/RegisterUserCommit/', user_register_commit, name='user_register_commit'),

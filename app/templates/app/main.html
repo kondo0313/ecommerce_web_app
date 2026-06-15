@@ -3,10 +3,10 @@
 
 <h1>商品の検索を行います。</h1>
 
-<form method="GET" action="">
+<form method="GET" action="{% url 'serch_result' %}">
     カテゴリ：
     <select name="category">
-        <option value="">すべて</option>
+        <option value="all">すべて</option>
         <option value="food">食品</option>
         <option value="book">本</option>
         <option value="other">その他</option>

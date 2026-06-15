@@ -162,11 +162,14 @@ def withdraw_commit(request):
     user = AccountUser.objects.filter(user_id=user_id).first()
 
     if request.method == "POST" and user:
-        user.delete()                  # ← 退会（削除）
+        user.delete()                  
 
     return render(request, "app/accounts/withdraw_commit.html", {"name": user.name})
 
 def serch_result(request):
-    return render(request, "shop/serch_result.html")
+    category = request.GET.get("category")
+    keyword = request.GET.get("keyword") 
+
+    return render(request, "shop/serch_result.html", {"category":category, "keyword":keyword})
 
 
