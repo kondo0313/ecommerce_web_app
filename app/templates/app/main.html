@@ -6,7 +6,9 @@
 <form method="GET" action="{% url 'serch_result' %}">
     カテゴリ：
     <select name="category">
-        <option value="all">すべて</option>
+        <option value="">すべて</option>
+        <option value="帽子">帽子</option>
+        <option value="鞄">鞄</option>
         <option value="food">食品</option>
         <option value="book">本</option>
         <option value="other">その他</option>
@@ -25,7 +27,7 @@
     <br>
     <a href="/accounts/UserInfo">ユーザー情報</a>
     <br>
-    <a href="/accounts/UserLogin">ログアウト(未実装)</a>
+    <a href="/accounts/UserLogout">ログアウト</a>
 {% else %}
     <a href="/accounts/UserLogin">ログイン</a>
 {% endif %}

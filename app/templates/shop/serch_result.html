@@ -1,6 +1,27 @@
 <html>
 <h1>キーワード"{{keyword}}", カテゴリ"{{category}}"の検索結果</h1>
 <body>
+    {% if items %}
+        <table border="1">
+            <tr>
+                <th>商品名</th>
+                <th>商品の色</th>
+                <th>メーカー名</th>
+                <th>価格</th>
+            </tr>
+
+            {% for item in items %}
+            <tr>
+                <td>{{ item.name }}</td>
+                <td>{{ item.color }}</td>
+                <td>{{ item.manufacturer }}</td>
+                <td>{{ item.price }}円</td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>検索結果はありません</p>
+    {% endif %}
     <br>
     <a href="{% url 'index' %}">商品検索へ</a>
 </body>

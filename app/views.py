@@ -6,6 +6,8 @@ from .models import AccountUser
 from django.contrib.auth.hashers import check_password
 from .forms import UserLoginForm
 from .forms import UserSignupForm
+from .models import ShoppingItem
+
 
 
 def index(request):
@@ -168,8 +170,31 @@ def withdraw_commit(request):
 
 def serch_result(request):
     category = request.GET.get("category")
-    keyword = request.GET.get("keyword") 
+    keyword = request.GET.get("keyword")
 
-    return render(request, "shop/serch_result.html", {"category":category, "keyword":keyword})
+    items = ShoppingItem.objects.all()
 
+    if category:
+        items = items.filter(category__name=category)
+
+    if keyword:
+        items = items.filter(name__icontains=keyword)
+
+    for item in items:
+        print(item.category)
+
+    return render(
+        request,
+        "shop/serch_result.html",
+        {
+            "items": items,
+            "category": category,
+            "keyword": keyword,
+        }
+    )
+
+def user_logout(request):
+    request.session.flush()
+    return redirect("user_login")
+    
 
